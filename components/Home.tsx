@@ -129,6 +129,7 @@ interface Iprops{
                 <Image style={styles.img} source={bell} />
                 <Image style={styles.img} source={search} />
                 <Image style={{marginTop:8}} source={user} />
+           
             </View>
         </View>
        <FlatList 

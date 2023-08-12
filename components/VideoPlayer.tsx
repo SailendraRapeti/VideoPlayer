@@ -1,13 +1,25 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Linking, Share, StyleSheet, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import Video from 'react-native-video';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 interface Iprops{
-  route:any;
+  route?:any;
 }
 class VideoPlayer extends Component <Iprops>{
+   onShare = async () => {
+       await Share.share({
+        message:
+          "",
+      });
+    }
+    onCall= async ()=>{
+      await Linking.openURL(`tel:${6303521561}`);
+
+    }
+  
   render() {
     const data = this.props.route.params.item 
-    console.log("dat",data)
+   
     return (
       <View style={styles.con}>
      <Video source={{
@@ -29,8 +41,26 @@ class VideoPlayer extends Component <Iprops>{
         </View>
         </View>
       <View style={{padding:15}}>
+<View style={{flexDirection:"row",gap:10}}>
 
-     
+
+ <TouchableOpacity onPress={this.onShare}>
+
+ <View style={styles.share}>
+<Text>share</Text>
+</View>
+  </TouchableOpacity>       
+
+  <TouchableOpacity onPress={this.onCall}>
+
+ <View style={styles.share}>
+<Text>call</Text>
+</View>
+  </TouchableOpacity>       
+
+
+  </View>
+   
         <Text>description</Text>
         <Text>{data.description}</Text>
         </View>
@@ -64,6 +94,15 @@ const styles=StyleSheet.create({
 con:{
   flex:1,
 
+},
+share:{
+  borderWidth:1,
+  borderColor:"blue",
+  borderRadius:20,
+  justifyContent:'center',
+  alignItems:'center',
+  height:30,
+  width:80
 }
 })
 export default VideoPlayer
